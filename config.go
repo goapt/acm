@@ -11,6 +11,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"net/url"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -153,7 +154,7 @@ func (n *Acm) Get(namespace, group, dataId string) (string, error) {
 		return "", err
 	}
 
-	timeStamp := fmt.Sprintf("%d", time.Now().UnixNano()/1e6)
+	timeStamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 
 	req.Header.Add("Content-Type", contentType)
 	req.Header.Add("Spas-AccessKey", n.SpasAccessKey)
@@ -164,7 +165,7 @@ func (n *Acm) Get(namespace, group, dataId string) (string, error) {
 	}
 
 	str := namespace + "+" + group + "+" + timeStamp
-	sign := hmacSHA1(n.SpasAccessKey, str)
+	sign := hmacSHA1(n.SpasSecretKey, str)
 
 	req.Header.Add("Spas-Signature", sign)
 
@@ -241,7 +242,7 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 		return false, err
 	}
 
-	timeStamp := fmt.Sprintf("%d", time.Now().UnixNano()/1e6)
+	timeStamp := strconv.FormatInt(time.Now().UnixNano()/1e6, 10)
 
 	req.Header.Add("Content-Type", contentType)
 	req.Header.Add("Spas-AccessKey", n.SpasAccessKey)
@@ -252,7 +253,7 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 	}
 
 	str := namespace + "+" + group + "+" + timeStamp
-	sign := hmacSHA1(n.SpasAccessKey, str)
+	sign := hmacSHA1(n.SpasSecretKey, str)
 
 	req.Header.Add("Spas-Signature", sign)
 
@@ -291,6 +292,5 @@ func md5string(text string) string {
 func hmacSHA1(key string, data string) string {
 	mac := hmac.New(sha1.New, []byte(key))
 	mac.Write([]byte(data))
-
 	return base64.StdEncoding.EncodeToString(mac.Sum(nil))
 }
