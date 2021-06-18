@@ -250,7 +250,7 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 		req.Header.Add("Spas-SecurityToken", n.SpasSecurityToken)
 	}
 
-	str := namespace + group + timeStamp
+	str := namespace + "+" + group + "+" + timeStamp
 	sign := hmacSHA1(n.SpasAccessKey, str)
 
 	req.Header.Add("Spas-Signature", sign)
