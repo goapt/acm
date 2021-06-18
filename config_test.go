@@ -10,7 +10,7 @@ func TestNacosConfig_ListenAsync(t *testing.T) {
 		c.RoleName = "BlogACMRole"
 	})
 
-	conf.ListenAsync("8b073ff4-1e58-41e9-ae72-37f8736bc9d4", "DEFAULT_GROUP", "test2", func(cnf string) {
+	conf.ListenAsync("26f1d5e2-b698-49cd-9cd9-f534661c388a", "DEFAULT_GROUP", "test", func(cnf string) {
 		t.Log(cnf)
 	})
 
