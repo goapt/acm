@@ -2,9 +2,9 @@
 
 ```go
 conf := nacos.NewAcm(func(c *NacosConfig) {
-    c.ServerAddr = "http://127.0.0.1:8848"
-    c.Username = "nacos"
-    c.Password = "nacos"
+	c.EndPoint = "acm.aliyun.com"
+    c.SpasAccessKey = "nacos"
+    c.SpasSecretKey = "nacos"
     c.PollTime = 20*time.Second // 设置监听轮询周期，默认10秒
 })
 
