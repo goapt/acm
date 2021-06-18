@@ -2,7 +2,7 @@
 
 ```go
 conf := nacos.NewAcm(func(c *NacosConfig) {
-	c.EndPoint = "acm.aliyun.com"
+    c.EndPoint = "acm.aliyun.com"
     c.SpasAccessKey = "xxxxx"
     c.SpasSecretKey = "xxxxxxxxxx"
     c.PollTime = 20*time.Second // 设置监听轮询周期，默认10秒
