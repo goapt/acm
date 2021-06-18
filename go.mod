@@ -1,3 +1,3 @@
-module github.com/verystar/nacos-go-sdk
+module github.com/goapt/acm
 
-go 1.15
+go 1.13
