@@ -256,6 +256,7 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 	sign := hmacSHA1(n.SpasSecretKey, str)
 
 	req.Header.Add("Spas-Signature", sign)
+	req.Header.Add("longPullingTimeout", "3000")
 
 	resp, err := n.HttpClient.Do(req)
 	if err != nil {
