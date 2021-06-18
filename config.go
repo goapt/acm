@@ -230,11 +230,9 @@ func (n *Acm) ListenAsync(namespace, group, dataId string, fn func(cnf string)) 
 }
 
 func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
-	n.Logger.Debug(fmt.Sprintf("acm listen start:[namespace:%s,group:%s,dataId:%s]", namespace, group, dataId))
+	n.Logger.Debug(fmt.Sprintf("acm listen start:[namespace:%s,group:%s,md5:%s,dataId:%s]", namespace, group, md5, dataId))
 
 	content := dataId + splitConfigInner + group + splitConfigInner + md5 + splitConfigInner + namespace + splitConfig
-
-	fmt.Println("===>", content)
 
 	v := url.Values{}
 	v.Add("Probe-Modify-Request", content)
