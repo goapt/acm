@@ -273,6 +273,8 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 		return false, fmt.Errorf("acm listen response error:%s", string(bb))
 	}
 
+	fmt.Println("===>", string(bb))
+
 	result := strings.Split(string(bb), "%02")
 
 	// 如果返回数据不为空则代表有变化的文件
