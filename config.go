@@ -234,6 +234,8 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 
 	content := dataId + splitConfigInner + group + splitConfigInner + md5 + splitConfigInner + namespace + splitConfig
 
+	fmt.Println("===>", content)
+
 	v := url.Values{}
 	v.Add("Probe-Modify-Request", content)
 
