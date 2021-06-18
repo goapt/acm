@@ -147,7 +147,7 @@ func (n *Acm) Get(namespace, group, dataId string) (string, error) {
 	v.Add("group", group)
 	v.Add("dataId", dataId)
 
-	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/diamond-server/config.co?", n.ServerAddr)+v.Encode(), nil)
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("http://%s/diamond-server/config.co?", n.ServerAddr)+v.Encode(), nil)
 	if err != nil {
 		return "", err
 	}
