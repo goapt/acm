@@ -147,7 +147,7 @@ func (n *Acm) Get(namespace, group, dataId string) (string, error) {
 	v.Add("group", group)
 	v.Add("dataId", dataId)
 
-	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("http://%s/diamond-server/config.co?", n.ServerAddr)+v.Encode(), nil)
+	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("http://%s:8080/diamond-server/config.co?", n.ServerAddr)+v.Encode(), nil)
 	if err != nil {
 		return "", err
 	}
@@ -235,7 +235,7 @@ func (n *Acm) Listen(namespace, group, dataId, md5 string) (bool, error) {
 	v := url.Values{}
 	v.Add("Probe-Modify-Request", content)
 
-	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/diamond-server/config.co", n.ServerAddr), strings.NewReader(v.Encode()))
+	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("http://%s:8080/diamond-server/config.co", n.ServerAddr), strings.NewReader(v.Encode()))
 	if err != nil {
 		return false, err
 	}
